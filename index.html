@@ -3,156 +3,593 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Carlo V. Santiago | Portfolio</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Mechanical Engineering Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- COLOR PALETTE & VARIABLES (Color Theory Compliant) --- */
+        :root {
+            --bg-primary: #121212;       /* Deep matte charcoal */
+            --bg-secondary: #1c1c1e;     /* Medium tech gray */
+            --bg-tertiary: #2a2a2d;      /* Light mechanical gray */
+            --accent-primary: #8b0000;   /* Deep Dark Red */
+            --accent-glow: #b30000;      /* Vibrant red for hover states */
+            --text-main: #e0e0e0;        /* Off-white for high readability */
+            --text-muted: #a0a0a5;       /* Muted gray for secondary details */
+            --blueprint-line: rgba(139, 0, 0, 0.05);
+            --transition-speed: 0.6s;
+        }
+
+        /* --- GLOBAL STYLES & BLUEPRINT BACKGROUND --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Engineering Grid Background Overlay */
+            background-image: 
+                linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- NAVIGATION PANEL --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(28, 28, 30, 0.95);
+            border-bottom: 2px solid var(--accent-primary);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent-primary);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* --- PAGE ANIMATIONS (Fade & Translation) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- LAYOUT SECTIONS --- */
+        section {
+            padding: 8rem 2rem 4rem 2rem;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Section Header Layout Architecture */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            color: var(--text-main);
+            border-left: 5px solid var(--accent-primary);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-content {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* --- HOME / HERO SECTION --- */
+        #home {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-primary);
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* Technical CAD-like Graphic Asset */
+        .hero-graphic {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mechanic-circle {
+            position: absolute;
+            border: 2px dashed var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 30s linear infinite;
+        }
+
+        .circle-1 { width: 300px; height: 300px; border-color: var(--accent-primary); }
+        .circle-2 { width: 240px; height: 240px; border-color: var(--bg-tertiary); border-style: solid; }
+        .circle-3 { width: 180px; height: 180px; border-color: var(--accent-glow); transform: rotate(45deg); }
+
+        .hero-graphic i {
+            font-size: 4rem;
+            color: var(--text-main);
+            opacity: 0.3;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .technical-specs {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-top: 3px solid var(--accent-primary);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+
+        .spec-item span:first-child {
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+        }
+
+        .project-image-placeholder {
+            height: 180px;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--bg-tertiary);
+            position: relative;
+        }
+
+        .project-image-placeholder i {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.05);
+        }
+
+        .project-tag {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--accent-primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        /* --- EXPERIENCE & EDUCATION --- */
+        .timeline {
+            position: relative;
+            border-left: 2px solid var(--bg-tertiary);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: calc(-2rem - 7px);
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-primary);
+            border: 2px solid var(--bg-primary);
+        }
+
+        .timeline-meta {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: var(--accent-glow);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 4px;
+            border-inline-start: 4px solid var(--accent-primary);
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            color: var(--text-main);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .btn-submit {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-glow);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--bg-tertiary);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design Rules */
+        @media (max-width: 768px) {
+            #home { flex-direction: column-reverse; text-align: center; }
+            .about-grid, .contact-container { grid-template-columns: 1fr; }
+            nav ul { display: none; } /* Simplified for structural template clarity */
+            .hero-graphic { width: 280px; height: 280px; }
+            .circle-1 { width: 260px; height: 260px; }
+            .circle-2 { width: 200px; height: 200px; }
+            .circle-3 { width: 140px; height: 140px; }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans scroll-smooth">
+<body>
 
-    <nav class="sticky top-0 bg-white shadow-md z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-xl font-bold text-blue-600 tracking-wide">JCVS</a>
-            <div class="space-x-6 text-sm font-medium">
-                <a href="#about" class="hover:text-blue-600 transition">About Me</a>
-                <a href="#academic" class="hover:text-blue-600 transition">Academic Projects</a>
-                <a href="#personal" class="hover:text-blue-600 transition">Personal Projects</a>
-                <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-gear"></i> ENG.PORTFOLIO
             </div>
-        </div>
-    </nav>
-
-    <header id="hero" class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-24 px-4 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
-                John Carlo V. Santiago
-            </h1>
-            <p class="text-xl md:text-2xl text-blue-100 font-light max-w-2xl mx-auto">
-                Welcome to my portfolio. Explore my academic background, technical projects, and personal endeavors.
-            </p>
-            <div class="mt-8">
-                <a href="#about" class="bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-blue-50 transition duration-300">
-                    Learn More About Me
-                </a>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Me</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-16 space-y-24">
+    <main>
 
-        <section id="about" class="scroll-mt-20">
-            <h2 class="text-3xl font-bold text-gray-900 border-b-4 border-blue-600 inline-block pb-2 mb-8">
-                About Me
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8 items-start">
-                <div class="md:col-span-2 space-y-4 text-lg text-gray-600 leading-relaxed">
-                    <p>
-                        Hello! I am John Carlo, a dedicated and passionate individual with a strong focus on problem-solving, analytical thinking, and building impactful projects. I enjoy diving deep into complex challenges, whether they are rooted in advanced mathematics, engineering physics, or software development.
-                    </p>
-                    <p>
-                        My academic journey has driven me to master rigorous concepts and translate theoretical knowledge into practical, real-world solutions. I am constantly looking for opportunities to expand my skill set, collaborate with others, and contribute to meaningful technical advancements.
-                    </p>
+        <section id="home">
+            <div class="hero-text">
+                <h1>Hi, I am <span>Alex Mercer</span></h1>
+                <h2>Mechanical Design & Systems Engineer</h2>
+                <p class="section-content">Specializing in CAD modeling, finite element analysis (FEA), and thermodynamic systems design. Bringing industrial concepts to life through structured engineering methodology.</p>
+            </div>
+            <div class="hero-graphic">
+                <div class="mechanic-circle circle-1"></div>
+                <div class="mechanic-circle circle-2"></div>
+                <div class="mechanic-circle circle-3"></div>
+                <i class="fa-solid fa-drafting-compass"></i>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> About Me</h2>
+            <div class="about-grid">
+                <div class="section-content">
+                    <p>I am a results-driven Mechanical Engineer focused on developing robust structural layouts and automated mechanical architectures. My design philosophy balances system optimization with practical manufacturability (DFM/DFA).</p>
+                    <br>
+                    <p>Experienced in cross-functional collaboration, coordinating tasks from high-fidelity parametric prototyping to laboratory validation and structural testing documentation.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 space-y-4">
-                    <h3 class="font-bold text-xl text-gray-900 border-b pb-2">Personal Information</h3>
-                    <ul class="space-y-2 text-sm text-gray-600">
-                        <li><strong>Location:</strong> Metro Manila, Philippines</li>
-                        <li><strong>Focus Areas:</strong> Applied Mathematics, Software Engineering, Physics Calculations</li>
-                        <li><strong>Core Skills:</strong> Advanced Calculus, Data Structuring, Problem Analysis, Web Layouts</li>
-                    </ul>
+                <div class="technical-specs">
+                    <div class="spec-item"><span>Primary Focus</span><span>Robotics & Kinematics</span></div>
+                    <div class="spec-item"><span>Core CAD Suite</span><span>SolidWorks, Autodesk Inventor</span></div>
+                    <div class="spec-item"><span>Analysis Stack</span><span>ANSYS (Static Structural / Thermal)</span></div>
+                    <div class="spec-item"><span>Manufacturing Tech</span><span>CNC Machining, Additive Manufacturing</span></div>
                 </div>
             </div>
         </section>
 
-        <section id="academic" class="scroll-mt-20">
-            <h2 class="text-3xl font-bold text-gray-900 border-b-4 border-blue-600 inline-block pb-2 mb-8">
-                Academic Projects
-            </h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Mathematics & Pedagogy</span>
-                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-3">Comprehensive Calculus Test Generator</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Developed an automated conversion pipeline designed to process a rigorous 100-question advanced calculus set. The system successfully formatted raw mathematical problems and answers into specialized, print-ready practice tests and digital flashcard modules focusing on indefinite integration and trigonometric substitution.
-                        </p>
+        <section id="projects" class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image-placeholder">
+                        <i class="fa-solid fa-car-chassis"></i>
+                        <span class="project-tag">FEA Analysis</span>
                     </div>
-                    <div class="pt-4 border-t border-gray-50 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded">Data Parsing</span>
-                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded">LaTeX Formatting</span>
+                    <div class="project-info">
+                        <h3>Automotive Chassis Optimization</h3>
+                        <p class="section-content">Conducted explicit dynamic structural simulations on an off-road vehicle chassis structure to optimize torsional rigidity while reducing weight by 14%.</p>
                     </div>
                 </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Physics & Engineering</span>
-                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-3">Inclined Plane Kinematics Analyzer</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Engineered a computational script to resolve multi-variable physics forces acting on inclined planes. The project specifically models and computes the precise force requirements needed to move objects of varying masses at a uniform speed when forces are applied at arbitrary angles relative to the incline.
-                        </p>
+                <div class="project-card">
+                    <div class="project-image-placeholder">
+                        <i class="fa-solid fa-robot"></i>
+                        <span class="project-tag">Robotics</span>
                     </div>
-                    <div class="pt-4 border-t border-gray-50 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded">Kinematics</span>
-                        <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded">Vector Mathematics</span>
+                    <div class="project-info">
+                        <h3>5-DOF Robotic Articulated Arm</h3>
+                        <p class="section-content">Designed and manufactured a 5-degree-of-freedom robotic arm utilizing precision planetary gear assemblies and custom actuator mounts.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="personal" class="scroll-mt-20">
-            <h2 class="text-3xl font-bold text-gray-900 border-b-4 border-blue-600 inline-block pb-2 mb-8">
-                Personal Projects
-            </h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Web Development</span>
-                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-3">Personal Portfolio Hub</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Designed and deployed this clean, fully responsive single-page portfolio website. Built utilizing a utility-first CSS architecture to ensure speedy rendering times, seamless mobile navigation, and optimized structure for showcasing professional components.
-                        </p>
+                <div class="project-card">
+                    <div class="project-image-placeholder">
+                        <i class="fa-solid fa-temperature-half"></i>
+                        <span class="project-tag">Thermal Dynamic</span>
                     </div>
-                    <div class="pt-4 border-t border-gray-50 flex flex-wrap gap-2">
-                        <span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded">HTML5</span>
-                        <span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded">Tailwind CSS</span>
-                        <span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded">GitHub Pages</span>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between">
-                    <div>
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Algorithmic Tools</span>
-                        <h3 class="text-xl font-bold text-gray-900 mt-1 mb-3">Step-by-Step Integral Solver Breakdown</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Built a personal documentation and code script repository dedicated to resolving and explaining high-level mathematical series. The tool steps through 15 complex core integration patterns, detailing structural breakdowns like integration by parts to clarify logic paths.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-gray-50 flex flex-wrap gap-2">
-                        <span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded">Algorithm Logic</span>
-                        <span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded">Markdown Docs</span>
+                    <div class="project-info">
+                        <h3>Industrial Heat Exchanger</h3>
+                        <p class="section-content">Engineered a shell-and-tube style heat exchanger model calculating fluid dynamics properties to scale operating thermal dissipation efficiency.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="scroll-mt-20 bg-gray-900 text-white p-8 md:p-12 rounded-2xl shadow-xl">
-            <div class="max-w-3xl mx-auto text-center space-y-6">
-                <h2 class="text-3xl font-bold">Get In Touch</h2>
-                <p class="text-gray-400 max-w-md mx-auto">
-                    Interested in collaborating, reviewing code, or just chatting about advanced calculus and physics? Drop a message!
-                </p>
-                <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-sm text-gray-300">
-                    <p><strong>Email:</strong> jcvsantiago@example.com</p>
-                    <p class="hidden sm:block">|</p>
-                    <p><strong>GitHub:</strong> github.com/jcvsantiago</p>
+        <section id="experience" class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-meta">
+                        <span class="section-content"><b>Senior Mechanical Designer</b> | Nexus Automation Corp</span>
+                        <span class="timeline-date">2024 - Present</span>
+                    </div>
+                    <p class="section-content">Lead design engineering workflows for high-speed automated packaging machinery. Oversee geometric dimensioning and tolerancing (GD&T) schemas.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-meta">
+                        <span class="section-content"><b>Mechanical Systems Engineer</b> | Vanguard Heavy Industries</span>
+                        <span class="timeline-date">2021 - 2024</span>
+                    </div>
+                    <p class="section-content">Executed detailed finite element analysis verification validation routines for structural load-bearing components deployed in heavy industrial material transport.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal">
+            <h2 class="section-title"><i class="fa-solid fa-envelope-open-text"></i> Contact</h2>
+            <div class="contact-container">
+                <div>
+                    <div class="contact-method">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <p><b>Email</b></p>
+                            <p class="section-content">a.mercer@engineering.me</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <p><b>Location</b></p>
+                            <p class="section-content">Chicago, IL (Open to Relocation)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form onsubmit="event.preventDefault(); alert('Message dispatched through staging script simulation.');">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name / Organization" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Project Specifications / Inquiry details..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit Request</button>
+                    </form>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-100 text-center py-6 border-t border-gray-200 text-xs text-gray-500">
-        <p>&copy; 2026 John Carlo V. Santiago. All rights reserved.</p>
+    <footer>
+        <p>&copy; 2026 Alex Mercer Engineering. Constructed with strict geometric layout principles.</p>
     </footer>
 
+    <script>
+        // Intersection Observer logic for Scroll-Driven Fade and Translate Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15 // Triggers when 15% of the section is visible
+        });
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Dynamic Active State Indicator tracking on the Top Nav Panel
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let currentSectionId = 'home';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Offset calculation to accommodate sticky navigation banner depth
+                if (pageYOffset >= sectionTop - 120) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(currentSectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
