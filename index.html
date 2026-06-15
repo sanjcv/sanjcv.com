@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanical Engineering Portfolio</title>
+    <title>Santiago John Carlo V. - Mechanical Engineering Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- COLOR PALETTE & VARIABLES (Color Theory Compliant) --- */
@@ -173,7 +173,6 @@
             letter-spacing: 3px;
         }
 
-        /* Technical CAD-like Graphic Asset */
         .hero-graphic {
             position: relative;
             width: 400px;
@@ -200,37 +199,10 @@
             opacity: 0.3;
         }
 
-        /* --- ABOUT ME SECTION --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .technical-specs {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--bg-tertiary);
-            border-top: 3px solid var(--accent-primary);
-            padding: 2rem;
-            border-radius: 4px;
-        }
-
-        .spec-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--bg-tertiary);
-        }
-
-        .spec-item span:first-child {
-            font-weight: bold;
-            color: var(--text-main);
-        }
-
-        /* --- PROJECTS SECTION --- */
+        /* --- PROJECTS SECTION (SWAPPING SLIDER STYLES) --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
         }
 
@@ -240,6 +212,8 @@
             border-radius: 4px;
             overflow: hidden;
             transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -247,78 +221,61 @@
             border-color: var(--accent-primary);
         }
 
-        .project-image-placeholder {
-            height: 180px;
-            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--bg-tertiary);
+        /* Image Slider Wrapper */
+        .slider-container {
             position: relative;
+            height: 240px;
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--bg-tertiary);
         }
 
-        .project-image-placeholder i {
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.05);
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out; /* Translation Swap Animation */
         }
 
-        .project-tag {
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Slider Controls */
+        .slider-btn {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: var(--accent-primary);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 2px;
-            text-transform: uppercase;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(18, 18, 18, 0.7);
+            border: 1px solid var(--bg-tertiary);
+            color: var(--text-main);
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s, color 0.3s;
+            z-index: 10;
         }
+
+        .slider-btn:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
 
         .project-info {
             padding: 1.5rem;
+            flex-grow: 1;
         }
 
         .project-info h3 {
             margin-bottom: 0.5rem;
             color: var(--text-main);
             font-weight: bold;
-        }
-
-        /* --- EXPERIENCE SECTION --- */
-        .timeline {
-            position: relative;
-            border-left: 2px solid var(--bg-tertiary);
-            padding-left: 2rem;
-            margin-left: 1rem;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: calc(-2rem - 7px);
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--accent-primary);
-            border: 2px solid var(--bg-primary);
-        }
-
-        .timeline-meta {
-            display: flex;
-            justify-content: space-between;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-date {
-            color: var(--accent-glow);
         }
 
         /* --- CONTACT SECTION --- */
@@ -344,41 +301,6 @@
             color: var(--accent-primary);
         }
 
-        .contact-form .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 1rem;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--bg-tertiary);
-            color: var(--text-main);
-            border-radius: 4px;
-            font-family: inherit;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-
-        .btn-submit {
-            background-color: var(--accent-primary);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--accent-glow);
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -388,10 +310,9 @@
             color: var(--text-muted);
         }
 
-        /* Responsive Design Rules */
         @media (max-width: 768px) {
             #home { flex-direction: column-reverse; text-align: center; }
-            .about-grid, .contact-container { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; }
             nav ul { display: none; } 
             .hero-graphic { width: 280px; height: 280px; }
             .circle-1 { width: 260px; height: 260px; }
@@ -411,8 +332,7 @@
                 <ul>
                     <li><a href="#home" class="nav-link active">Home</a></li>
                     <li><a href="#about" class="nav-link">About Me</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#projects" class="nav-link">Academic Projects</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
@@ -423,9 +343,9 @@
 
         <section id="home">
             <div class="hero-text">
-                <h1>Hi, I am <span>Alex Mercer</span></h1>
-                <h2>Mechanical Design & Systems Engineer</h2>
-                <p class="section-content">Welcome to my professional engineering hub. Below you will find comprehensive layouts detailing my background, architectural project files, and industry experiences.</p>
+                <h1>Hi, I am <span>Santiago John Carlo V.</span></h1>
+                <h2>Aspiring Mechanical Engineer</h2>
+                <p class="section-content">Welcome to my engineering portfolio hub. Below you will find comprehensive updates detailing my academic milestones and practical mechanical blueprints.</p>
             </div>
             <div class="hero-graphic">
                 <div class="mechanic-circle circle-1"></div>
@@ -437,74 +357,61 @@
 
         <section id="about" class="reveal">
             <h2 class="section-title">About Me</h2>
-            <div class="about-grid">
-                <div class="section-content">
-                    <p>I am a results-driven Mechanical Engineer focused on developing robust structural layouts and automated mechanical architectures. My design philosophy balances system optimization with practical manufacturability (DFM/DFA).</p>
-                    <br>
-                    <p>Experienced in cross-functional collaboration, coordinating tasks from high-fidelity parametric prototyping to laboratory validation and structural testing documentation.</p>
-                </div>
-                <div class="technical-specs">
-                    <div class="spec-item"><span>Primary Focus</span><span>Robotics & Kinematics</span></div>
-                    <div class="spec-item"><span>Core CAD Suite</span><span>SolidWorks, Autodesk Inventor</span></div>
-                    <div class="spec-item"><span>Analysis Stack</span><span>ANSYS (Static Structural / Thermal)</span></div>
-                    <div class="spec-item"><span>Manufacturing Tech</span><span>CNC Machining, Additive Manufacturing</span></div>
-                </div>
+            <div class="section-content">
+                <p>I am an aspiring Mechanical engineer who has now completed his first year in college at National University Manila. I aspire to work in the automotive industry specifically in design and manufacturing of engines. My driving force to work in this industry is my strong passion for automobiles. I am striving as a student to become a significant figure in changing the way we perceive the automobile.</p>
             </div>
         </section>
 
         <section id="projects" class="reveal">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title">Academic Projects</h2>
             <div class="projects-grid">
+                
                 <div class="project-card">
-                    <div class="project-image-placeholder">
-                        <i class="fa-solid fa-car-chassis"></i>
-                        <span class="project-tag">FEA Analysis</span>
+                    <div class="slider-container" id="slider-hammer">
+                        <button class="slider-btn prev-btn" onclick="moveSlide('slider-hammer', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="slider-track">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1BeDwl_9ynt4vPj0mLGUsxn-YrNtIk_cu" alt="Machining hammer Image 1">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=18-WobFh706KOo30M8p2oWeeyK5aQCgSq" alt="Machining hammer Image 2">
+                        </div>
+                        <button class="slider-btn next-btn" onclick="moveSlide('slider-hammer', 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     <div class="project-info">
-                        <h3>Automotive Chassis Optimization</h3>
-                        <p class="section-content">Conducted explicit dynamic structural simulations on an off-road vehicle chassis structure to optimize torsional rigidity while reducing weight by 14%.</p>
+                        <h3>Machining hammer</h3>
+                        <p class="section-content">Development details, physical assembly configurations, and structural manufacturing iterations for the machining hammer project assignment.</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image-placeholder">
-                        <i class="fa-solid fa-robot"></i>
-                        <span class="project-tag">Robotics</span>
-                    </div>
-                    <div class="project-info">
-                        <h3>5-DOF Robotic Articulated Arm</h3>
-                        <p class="section-content">Designed and manufactured a 5-degree-of-freedom robotic arm utilizing precision planetary gear assemblies and custom actuator mounts.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image-placeholder">
-                        <i class="fa-solid fa-temperature-half"></i>
-                        <span class="project-tag">Thermal Dynamic</span>
-                    </div>
-                    <div class="project-info">
-                        <h3>Industrial Heat Exchanger</h3>
-                        <p class="section-content">Engineered a shell-and-tube style heat exchanger model calculating fluid dynamics properties to scale operating thermal dissipation efficiency.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="experience" class="reveal">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="section-content"><b>Senior Mechanical Designer</b> | Nexus Automation Corp</span>
-                        <span class="timeline-date">2024 - Present</span>
+                <div class="project-card">
+                    <div class="slider-container" id="slider-table">
+                        <button class="slider-btn prev-btn" onclick="moveSlide('slider-table', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="slider-track">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1yIgkbpL1Rw8vrXvECeSLtr8NNRiJJQ_M" alt="Wooden Table Image 1">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1J3YUePizgD5C_xdeUQ0HyLbX-bNysNlp" alt="Wooden Table Image 2">
+                        </div>
+                        <button class="slider-btn next-btn" onclick="moveSlide('slider-table', 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
-                    <p class="section-content">Lead design engineering workflows for high-speed automated packaging machinery. Oversee geometric dimensioning and tolerancing (GD&T) schemas.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-meta">
-                        <span class="section-content"><b>Mechanical Systems Engineer</b> | Vanguard Heavy Industries</span>
-                        <span class="timeline-date">2021 - 2024</span>
+                    <div class="project-info">
+                        <h3>Wooden Table</h3>
+                        <p class="section-content">Material construction design, geometric joins, and assembly steps executed during the structural woodworking project phase.</p>
                     </div>
-                    <p class="section-content">Executed detailed finite element analysis verification validation routines for structural load-bearing components deployed in heavy industrial material transport.</p>
                 </div>
+
+                <div class="project-card">
+                    <div class="slider-container" id="slider-bits">
+                        <button class="slider-btn prev-btn" onclick="moveSlide('slider-bits', -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="slider-track">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1AWZwZ9tsKmrcazkyVhBFDIsDfaons5eI" alt="Lathe Machine Tool bits Image 1">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1Q6MtFi8lmXOKrU0MIMxIEsKSS8m-Sbi6" alt="Lathe Machine Tool bits Image 2">
+                            <img class="slide" src="https://drive.google.com/uc?export=view&id=1xGdf-_CmRludvCthIzIs37GdWBuXuuK2" alt="Lathe Machine Tool bits Image 3">
+                        </div>
+                        <button class="slider-btn next-btn" onclick="moveSlide('slider-bits', 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div class="project-info">
+                        <h3>Lathe Machine Tool bits</h3>
+                        <p class="section-content">Configuration blueprints, tool profile shaping measurements, and cutting edges generated for lathe machinery tasks.</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -516,30 +423,16 @@
                         <i class="fa-solid fa-envelope"></i>
                         <div>
                             <p><b>Email</b></p>
-                            <p class="section-content">a.mercer@engineering.edu</p>
+                            <p class="section-content">johncarlo0824@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-method">
                         <i class="fa-solid fa-location-dot"></i>
                         <div>
-                            <p><b>Location</b></p>
-                            <p class="section-content">Chicago, IL (Open to Relocation)</p>
+                            <p><b>Institution</b></p>
+                            <p class="section-content">National University Manila</p>
                         </div>
                     </div>
-                </div>
-                <div class="contact-form">
-                    <form onsubmit="event.preventDefault(); alert('Message transmission simulated.');">
-                        <div class="form-group">
-                            <input type="text" placeholder="Full Name / Organization" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="5" placeholder="Project Specifications / Inquiry details..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">Submit Request</button>
-                    </form>
                 </div>
             </div>
         </section>
@@ -547,7 +440,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Engineering Portfolio Hub. Formulated under technical layout standards.</p>
+        <p>&copy; 2026 Santiago John Carlo V. Portfolio. Engineered under technical parameters.</p>
     </footer>
 
     <script>
@@ -590,8 +483,37 @@
                 }
             });
         });
+
+        // Image Slider Tracking States
+        const sliderIndices = {
+            'slider-hammer': 0,
+            'slider-table': 0,
+            'slider-bits': 0
+        };
+
+        // Translation Swapping Animation Function for project multiple images
+        function moveSlide(sliderId, direction) {
+            const container = document.getElementById(sliderId);
+            const track = container.querySelector('.slider-track');
+            const slides = container.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+
+            let currentIndex = sliderIndices[sliderId];
+            currentIndex += direction;
+
+            // Loop parameters
+            if (currentIndex >= totalSlides) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = totalSlides - 1;
+            }
+
+            sliderIndices[sliderId] = currentIndex;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
     </script>
 </body>
 </html>
+
 
 
