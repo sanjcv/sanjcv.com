@@ -123,10 +123,10 @@
             justify-content: center;
         }
 
-        /* Section Header Layout Architecture */
+        /* Title: Bold letters | Content: Normal lettering */
         .section-title {
             font-size: 2.2rem;
-            font-weight: 800;
+            font-weight: bold; /* Bold Letters */
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 2.5rem;
@@ -139,7 +139,7 @@
         }
 
         .section-content {
-            font-weight: 400;
+            font-weight: normal; /* Normal Lettering */
             color: var(--text-muted);
             font-size: 1.05rem;
         }
@@ -155,7 +155,7 @@
 
         .hero-text h1 {
             font-size: 3.5rem;
-            font-weight: 800;
+            font-weight: bold;
             line-height: 1.2;
             margin-bottom: 1rem;
         }
@@ -167,7 +167,7 @@
         .hero-text h2 {
             font-size: 1.5rem;
             color: var(--text-muted);
-            font-weight: 400;
+            font-weight: normal;
             margin-bottom: 2rem;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -200,7 +200,7 @@
             opacity: 0.3;
         }
 
-        /* --- ABOUT SECTION --- */
+        /* --- ABOUT ME SECTION --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -282,9 +282,10 @@
         .project-info h3 {
             margin-bottom: 0.5rem;
             color: var(--text-main);
+            font-weight: bold;
         }
 
-        /* --- EXPERIENCE & EDUCATION --- */
+        /* --- EXPERIENCE SECTION --- */
         .timeline {
             position: relative;
             border-left: 2px solid var(--bg-tertiary);
@@ -391,7 +392,7 @@
         @media (max-width: 768px) {
             #home { flex-direction: column-reverse; text-align: center; }
             .about-grid, .contact-container { grid-template-columns: 1fr; }
-            nav ul { display: none; } /* Simplified for structural template clarity */
+            nav ul { display: none; } 
             .hero-graphic { width: 280px; height: 280px; }
             .circle-1 { width: 260px; height: 260px; }
             .circle-2 { width: 200px; height: 200px; }
@@ -424,7 +425,7 @@
             <div class="hero-text">
                 <h1>Hi, I am <span>Alex Mercer</span></h1>
                 <h2>Mechanical Design & Systems Engineer</h2>
-                <p class="section-content">Specializing in CAD modeling, finite element analysis (FEA), and thermodynamic systems design. Bringing industrial concepts to life through structured engineering methodology.</p>
+                <p class="section-content">Welcome to my professional engineering hub. Below you will find comprehensive layouts detailing my background, architectural project files, and industry experiences.</p>
             </div>
             <div class="hero-graphic">
                 <div class="mechanic-circle circle-1"></div>
@@ -435,7 +436,7 @@
         </section>
 
         <section id="about" class="reveal">
-            <h2 class="section-title"><i class="fa-solid fa-user-gear"></i> About Me</h2>
+            <h2 class="section-title">About Me</h2>
             <div class="about-grid">
                 <div class="section-content">
                     <p>I am a results-driven Mechanical Engineer focused on developing robust structural layouts and automated mechanical architectures. My design philosophy balances system optimization with practical manufacturability (DFM/DFA).</p>
@@ -452,7 +453,7 @@
         </section>
 
         <section id="projects" class="reveal">
-            <h2 class="section-title"><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+            <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image-placeholder">
@@ -488,7 +489,7 @@
         </section>
 
         <section id="experience" class="reveal">
-            <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Experience</h2>
+            <h2 class="section-title">Experience</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-meta">
@@ -508,14 +509,14 @@
         </section>
 
         <section id="contact" class="reveal">
-            <h2 class="section-title"><i class="fa-solid fa-envelope-open-text"></i> Contact</h2>
+            <h2 class="section-title">Contact</h2>
             <div class="contact-container">
                 <div>
                     <div class="contact-method">
                         <i class="fa-solid fa-envelope"></i>
                         <div>
                             <p><b>Email</b></p>
-                            <p class="section-content">a.mercer@engineering.me</p>
+                            <p class="section-content">a.mercer@engineering.edu</p>
                         </div>
                     </div>
                     <div class="contact-method">
@@ -527,7 +528,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form onsubmit="event.preventDefault(); alert('Message dispatched through staging script simulation.');">
+                    <form onsubmit="event.preventDefault(); alert('Message transmission simulated.');">
                         <div class="form-group">
                             <input type="text" placeholder="Full Name / Organization" required>
                         </div>
@@ -546,7 +547,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 Alex Mercer Engineering. Constructed with strict geometric layout principles.</p>
+        <p>&copy; 2026 Engineering Portfolio Hub. Formulated under technical layout standards.</p>
     </footer>
 
     <script>
@@ -561,7 +562,7 @@
             });
         }, {
             root: null,
-            threshold: 0.15 // Triggers when 15% of the section is visible
+            threshold: 0.15 
         });
 
         revealElements.forEach(element => {
@@ -577,7 +578,6 @@
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                // Offset calculation to accommodate sticky navigation banner depth
                 if (pageYOffset >= sectionTop - 120) {
                     currentSectionId = section.getAttribute('id');
                 }
@@ -593,3 +593,5 @@
     </script>
 </body>
 </html>
+
+
